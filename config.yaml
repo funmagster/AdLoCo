@@ -1,0 +1,60 @@
+project_name: 'Multi instance training'
+task_name: 'AdLoCo'
+
+# --- DEVICES AND SEED ---
+training_seed: 42
+CUDA_VISIBLE_DEVICES: "3"
+
+# --- LOGS ---
+log_dir: "logs"
+log_file: "training_log.log"
+memory_report_dir: "memory_report"
+model_training_report_dir: "model_training_report"
+model_weights_dir: "model_weights"
+
+# --- DATASET ---
+# dataset: "imdb"   # For BERT
+dataset: "c4"       # For Microllama
+data_sample_size: 2048
+val_size: 100
+samples_per_class: 500
+
+# --- C4 DATASET SETTINGS ---
+c4_language: "en"
+c4_streaming: true
+# Path to the tokenized C4 dataset (if specified, the pre-tokenized will be loaded)
+c4_tokenized_path: /home/shared/mit/c4_en_3645042_tokenized
+
+# --- MODELS ---
+model_type: 'microllama'
+model_config: {"name": "keeeeenw/MicroLlama", pretrained=True}
+# model_type: 'bert'
+# model_config: {"name": "google-bert/bert-base-uncased", "num_labels": 2, "pretrained": True}
+
+# --- TRAIN SETTINGS ---
+num_outer_steps: 20
+lr_inner: "2e-5"
+lr_outer: "0.5"
+lr_sgd: "2e-5"
+nodes_per_gpu: 4
+num_init_trainers: 4
+num_inner_steps: 200
+save_weights_every: 4
+initial_batch_size: 1
+distributed_algo: "DiLoCo"
+padding_percentage: 0.9
+single_seed: true
+need_to_reinit_output_layers: true
+
+# Policy
+merging_policy: "worst_with_worst" # Available: "best_with_worst", "worst_with_worst"
+merge_frequency: 2
+
+# Batching
+
+sampling_method: "augmented_inner_product_test"
+switch_mode: "threshold_switch_mode" # Available: "threshold_switch_mode", "only_gradient_accumulation", "only_data_loader"
+
+ETA: 0.8
+vartheta: 0.01
+nu: 0.3

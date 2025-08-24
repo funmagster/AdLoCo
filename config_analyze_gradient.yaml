@@ -1,0 +1,13 @@
+script_settings:
+  checkpoint_path: "...pth"
+  dataset_name: "c4"
+  batch_size: 32
+  output_dir: "gradient_plots"
+  model_name: "microllama"
+  model_config: {"name": "google-bert/bert-base-uncased", "num_labels": 2, "pretrained": True}
+  num_classes: 2
+  data_sample_size: 1000
+  starcoder_data_dir: "python"
+  seed: 42
+  cuda: "cuda:1"
+  outer_steps: 1

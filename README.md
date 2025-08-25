@@ -1,9 +1,5 @@
 # AdLoCo: adaptive batching significantly improves communications efficiency and convergence for Large Language Models
 
-ICOMP 2025
-
-*Anonymous authors, paper under double-blind review.*
-
 ![trainer merger demo](assets/diagram4.drawio.png)
 
 ## Abstract
